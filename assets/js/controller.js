@@ -90,7 +90,7 @@ myApp.controller('mapCtrl', function($scope) {
 		map = new google.maps.Map(document.getElementById('map'), {
 
 	    center: position,
-	    zoom: 15
+	    zoom: 13
 	  });
 
 		infowindow = new google.maps.InfoWindow();
@@ -119,7 +119,7 @@ myApp.controller('mapCtrl', function($scope) {
   		});
 
   		google.maps.event.addListener(marker, 'click', function() {
-  			infowindow.setContent(place.name);
+  			infowindow.setContent('<h2>'+place.name+'</h2>');
   			infowindow.open(map, this);
   		});
   	}
