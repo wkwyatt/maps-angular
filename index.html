@@ -31,7 +31,7 @@
 			<div class="city" ng-repeat="city in (filteredCities = (cities | filter:searchString))">
 				{{city.yearRank}}: {{city.city}}
 				<a class="btn btn-primary sm map-buttons" href="#" ng-click="triggerClick(city.yearRank)">
-					Show Info
+					GET INFO
 				</a>
 			</div>
 		</form>
