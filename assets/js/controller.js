@@ -98,7 +98,7 @@ myApp.controller('mapCtrl', function($scope) {
   		var service = new google.maps.places.PlacesService(map);
   		service.nearbySearch({
   			location: position,
-  			radius: 500,
+  			radius: 200000,
   			types: ['lodging']
   		}, callback);
   	}
