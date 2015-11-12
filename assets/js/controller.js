@@ -71,16 +71,22 @@ myApp.controller('mapCtrl', function($scope) {
 	}
 
 	$scope.updateMarkers = function() {
-		alert("test");
+		//for loop clears all markers when it runs.
 		for(i=0;i < $scope.markers.length; i++) {
 			$scope.markers[i].setMap(null);
 		}
-
+		// for loop sets markers on only cities included in filter search.
 		for (var i = 0; i < $scope.filteredCities.length; i++) {
 			createMarker($scope.filteredCities[i], i);
 		};
 
-		console.log($scope.filteredCities);
+	}
+
+	$scope.lodgingSearch = function(city) {
+		map = new google.maps.Map(document.getElementById('map'), {
+	    center: pyrmont,
+	    zoom: 15
+	  });
 	}
 
 	getDirections = function (lat, lon) {
