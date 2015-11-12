@@ -10,7 +10,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 
 	<!-- API -->
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&signed_in=true"></script>
 
 	<!-- STYLESHEETS -->
 	<link rel="stylesheet" href="assets/css/style.css">
@@ -21,15 +21,36 @@
 </head>
 <body ng-controller="mapCtrl">
 	<div id="map"></div>
-
+	<!-- LIST OF CITIES -->
 	<div id="list-window">
-		<div class="city" ng-repeat="city in cities">
-			{{city.yearRank}}: {{city.city}}
+		<!-- FILTER SEARCH OF CITIES -->
+		<form ng-submit="updateMarkers(searchString)">
+			<input id="filter-input" ng-model="searchString" type="text">
+			<input class="btn btn-defualt" type="submit" value="Update Map">
+			<!-- LOOP THROUGH CITIES OBJECT IN ANG -->
+			<div class="city" ng-repeat="city in (filteredCities = (cities | filter:searchString))">
+				{{city.yearRank}}: {{city.city}}
 				<a class="btn btn-primary sm map-buttons" href="#" ng-click="triggerClick(city.yearRank)">
-					Show Info
+				Show info
 				</a>
-		</div>
+				<a class="btn btn-danger sm map-buttons" href="#" ng-click="lodgingSearch(city.latLon)">
+				Search Hotels!
+				</a>
+				
+			</div>
+		</form>
 	</div>
 	<div id="map-panel"></div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+

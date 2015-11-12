@@ -62,6 +62,79 @@ myApp.controller('mapCtrl', function($scope) {
 		google.maps.event.trigger($scope.markers[i-1], 'click');
 	}
 
+<<<<<<< HEAD
+	$scope.updateMarkers = function() {
+		//for loop clears all markers when it runs.
+		for(i=0;i < $scope.markers.length; i++) {
+			$scope.markers[i].setMap(null);
+		}
+		// for loop sets markers on only cities included in filter search.
+		for (var i = 0; i < $scope.filteredCities.length; i++) {
+			createMarker($scope.filteredCities[i], i);
+		};
+
+	}
+
+	$scope.lodgingSearch = function(latLon) {
+		latLon = latLon.split(',');
+		var lat = latLon[0];
+		var lon = latLon[1];
+		var position = new google.maps.LatLng(lat, lon)
+		map = new google.maps.Map(document.getElementById('map'), {
+
+	    center: position,
+	    zoom: 13
+	  });
+
+		infowindow = new google.maps.InfoWindow();
+
+  		var service = new google.maps.places.PlacesService(map);
+  		service.nearbySearch({
+  			location: position,
+  			radius: 5000000,
+  			types: ['lodging']
+  		}, callback);
+  	}
+  	function callback(results, status) {
+  		if (status === google.maps.places.PlacesServiceStatus.OK) {
+  			for (var i = 0; i < results.length; i++) {
+  				createLodgingMarker(results[i]);
+  			}
+  		}
+  	}
+
+  	function createLodgingMarker(place) {
+
+  		var placeLoc = place.geometry.location;
+  		var marker = new google.maps.Marker({
+  			map: map,
+  			position: place.geometry.location
+  		});
+
+  		google.maps.event.addListener(marker, 'click', function() {
+  			infowindow.setContent('<h2>'+place.name+'</h2>');
+  			infowindow.open(map, this);
+  		});
+  	}
+
+	
+
+||||||| merged common ancestors
+	$scope.updateMarkers = function() {
+		alert("test");
+		for(i=0;i < $scope.markers.length; i++) {
+			$scope.markers[i].setMap(null);
+		}
+
+		for (var i = 0; i < $scope.filteredCities.length; i++) {
+			createMarker($scope.filteredCities[i], i);
+		};
+
+		console.log($scope.filteredCities);
+	}
+
+=======
+>>>>>>> master
 	getDirections = function (lat, lon) {
 		// 
 		var directionsService = new google.maps.DirectionsService();
