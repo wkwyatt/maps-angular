@@ -7,4 +7,12 @@ myApp.controller('mapCtrl', function($scope) {
 		center: new google.maps.LatLng(40.0000, -98.0000), 
 		mapTypeId: google.maps.mapTypeId.TERRAIN
 	}
+
+	$scope.map = new google.maps.Map(document.getElementById('map'),)
+	$scope.markers = [];
+
+	var infoWindow = new google.maps.infoWindow();
+
+	$scope.cities = cities;
+	
 });
