@@ -26,12 +26,20 @@ myApp.controller('mapCtrl', function($scope) {
 		var lat = latLon[0];
 		var lon = latLon[1];
 
+		// set the icon according to the rank of the index of the markers array
+		if(index == 0) {
+			icon = 'assets/images/1.png';
+		} else if(index == 38) {
+			icon = 'assets/images/atl.png';
+		} else {
+			icon = 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2%7CFE7569';
+		}
 		// convert lat lon array items into an objects
 		var marker = new google.maps.Marker({
 			map: $scope.map,
 			position: new google.maps.LatLng(lat, lon),
 			title: city.city,
-			icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2%7CFE7569'
+			icon: icon
 		});
 
 		// create HTML for the info window div
@@ -62,18 +70,31 @@ myApp.controller('mapCtrl', function($scope) {
 		google.maps.event.trigger($scope.markers[i-1], 'click');
 	}
 
+	$scope.updateMarkers = function() {
+		alert("test");
+		for(i=0;i < $scope.markers.length; i++) {
+			$scope.markers[i].setMap(null);
+		}
+
+		for (var i = 0; i < $scope.filteredCities.length; i++) {
+			createMarker($scope.filteredCities[i], i);
+		};
+
+		console.log($scope.filteredCities);
+	}
+
 	getDirections = function (lat, lon) {
 		// 
 		var directionsService = new google.maps.DirectionsService();
    		var directionsDisplay = new google.maps.DirectionsRenderer();
-   		var map = new google.mpas.Map(document.getElementById('map'), {
+   		var map = new google.maps.Map(document.getElementById('map'), {
    			zoom: 7,
    			mapTypeId: google.maps.MapTypeId.ROADMAP
    		});
 
    		// set the map for directions on the id given
    		directionsDisplay.setMap(map);
-   		directionsService.setPanel(document.getElementById('map-panel'));
+   		directionsDisplay.setPanel(document.getElementById('map-panel'));
 
    		var request = {
            //Origin hardcoded to Atlanta. Require geocode current loc,
@@ -95,6 +116,6 @@ myApp.controller('mapCtrl', function($scope) {
 
 	// create marker for each city object
     for(i=0;i<cities.length;i++){
-        createMarker(cities[i],i)
+        createMarker(cities[i],i);
     }
 });
