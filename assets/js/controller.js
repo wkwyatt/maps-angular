@@ -83,8 +83,13 @@ myApp.controller('mapCtrl', function($scope) {
 	}
 
 	$scope.lodgingSearch = function(latLon) {
+		latLon = latLon.split(',');
+		var lat = latLon[0];
+		var lon = latLon[1];
+		var position = new google.maps.LatLng(lat, lon)
 		map = new google.maps.Map(document.getElementById('map'), {
-	    center: latLon,
+
+	    center: position,
 	    zoom: 15
 	  });
 
@@ -92,7 +97,7 @@ myApp.controller('mapCtrl', function($scope) {
 
   		var service = new google.maps.places.PlacesService(map);
   		service.nearbySearch({
-  			location: latLon,
+  			location: position,
   			radius: 500,
   			types: ['lodging']
   		}, callback);
@@ -100,17 +105,25 @@ myApp.controller('mapCtrl', function($scope) {
   	function callback(results, status) {
   		if (status === google.maps.places.PlacesServiceStatus.OK) {
   			for (var i = 0; i < results.length; i++) {
-  				createMarker(results[i]);
+  				createLodgingMarker(results[i]);
   			}
   		}
   	}
 
+  	function createLodgingMarker(place) {
 
-  	google.maps.event.addListener(marker, 'click', function() {
-  		infowindow.setContent(place.name);
-  		infowindow.open(map, this);
-  	});
-  }
+  		var placeLoc = place.geometry.location;
+  		var marker = new google.maps.Marker({
+  			map: map,
+  			position: place.geometry.location
+  		});
+
+  		google.maps.event.addListener(marker, 'click', function() {
+  			infowindow.setContent(place.name);
+  			infowindow.open(map, this);
+  		});
+  	}
+
 	
 
 	getDirections = function (lat, lon) {
