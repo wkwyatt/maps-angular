@@ -27,15 +27,21 @@
 		<form ng-submit="updateMarkers(searchString)" class="row form-inline">
 			<input id="filter-input" class="form-control" ng-model="searchString" type="text">
 			<input class="btn btn-defualt" type="submit" value="Update Map">
-			<!-- LOOP THROUGH CITIES OBJECT IN ANG -->
-			<div class="city container" ng-repeat="city in (filteredCities = (cities | filter:searchString))">
-				<h4>{{city.yearRank}}: {{city.city}}</h4>
-				<a class="btn btn-primary sm map-buttons" href="#" ng-click="triggerClick(city.yearRank)">
-				Show info
-				</a>
-				<a class="btn btn-danger sm map-buttons" href="#" ng-click="lodgingSearch(city.latLon)">
-				Search Hotels!
-				</a>
+			<!-- INITIALIZE THE items VARIABLE TO THE cities OBJECT ARRAY & SET THE items TO cites WHEN CLICKED -->
+			<input class="btn btn-defualt" ng-model="items" ng-init="items = cities" type="button" ng-click="items = cities"  value="All Cities">
+
+			<!-- LOOP THROUGH OBJECT ARRAY IN ANG -->
+			<div class="city container"  ng-repeat="item in (filteredItems = (items | filter:searchString))">
+				<!-- SHOW THIS INFO IF THE ITEMS BEING LOOPED THROUGH ARE THE cities OBJECT -->
+				<span ng-show="items == cities">
+					<h4>{{item.yearRank}}: {{item.city}}</h4>
+					<a class="btn btn-primary sm map-buttons" href="#" ng-click="triggerClick(item.yearRank)">
+						Show info
+					</a>
+					<a class="btn btn-danger sm map-buttons" href="#" ng-click="lodgingSearch(item.latLon)">
+						Search Hotels!
+					</a>
+				</span>
 				
 			</div>
 		</form>

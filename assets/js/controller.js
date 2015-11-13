@@ -80,26 +80,25 @@ myApp.controller('mapCtrl', function($scope) {
 		var lon = latLon[1];
 		var position = new google.maps.LatLng(lat, lon)
 		map = new google.maps.Map(document.getElementById('map'), {
-
-	    center: position,
-	    zoom: 13
-	  });
+			center: position,
+			zoom: 13
+		});
 
 		infowindow = new google.maps.InfoWindow();
 
-  		var service = new google.maps.places.PlacesService(map);
-  		service.nearbySearch({
-  			location: position,
-  			radius: 5000000,
-  			types: ['lodging']
-  		}, callback);
-  	}
-  	function callback(results, status) {
-  		if (status === google.maps.places.PlacesServiceStatus.OK) {
-  			for (var i = 0; i < results.length; i++) {
-  				createLodgingMarker(results[i]);
-  			}
-  		}
+		var service = new google.maps.places.PlacesService(map);
+		service.nearbySearch({
+			location: position,
+			radius: 5000000,
+			types: ['lodging']
+		}, callback);
+	}
+	function callback(results, status) {
+		if (status === google.maps.places.PlacesServiceStatus.OK) {
+			for (var i = 0; i < results.length; i++) {
+				createLodgingMarker(results[i]);
+			}
+		}
   	}
 
   	function createLodgingMarker(place) {
@@ -123,11 +122,11 @@ myApp.controller('mapCtrl', function($scope) {
 			$scope.markers[i].setMap(null);
 		}
 
-		for (var i = 0; i < $scope.filteredCities.length; i++) {
-			createMarker($scope.filteredCities[i], i);
+		for (var i = 0; i < $scope.filteredItems.length; i++) {
+			createMarker($scope.filteredItems[i], i);
 		};
 
-		console.log($scope.filteredCities);
+		console.log($scope.filteredItems);
 	}
 
 	getDirections = function (lat, lon) {
@@ -160,7 +159,7 @@ myApp.controller('mapCtrl', function($scope) {
 
 	// put the cities object array into the angular controller scope
 	$scope.cities = cities;
-
+	
 	// create marker for each city object
     for(i=0;i<cities.length;i++){
         createMarker(cities[i],i)
