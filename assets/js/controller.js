@@ -21,8 +21,6 @@ myApp.controller('mapCtrl', function($scope) {
 	// create markers for the map
 	var createMarker = function(position, title, icon) {
 
-// console.log(position);
-
 		var marker = new google.maps.Marker({
 			map: $scope.map,
 			position: position,
@@ -73,22 +71,6 @@ myApp.controller('mapCtrl', function($scope) {
 //*********  Need to pass infowindow info from cities array to populate the info box.
 		infowindow = new google.maps.InfoWindow();
 
-// <<<<<<< HEAD
-//   		var service = new google.maps.places.PlacesService(map);
-//   		service.nearbySearch({
-//   			location: position,
-//   			radius: 5000000,
-//   			types: ['lodging']
-//   		}, callback);
-//   	}
-
-//   	function callback(results, status) {
-//   		if (status === google.maps.places.PlacesServiceStatus.OK) {
-//   			for (var i = 0; i < results.length; i++) {
-//   				createLodgingMarker(results[i]);
-//   			}
-//   		}
-// =======
 		var service = new google.maps.places.PlacesService(map);
 		service.nearbySearch({
 			location: position,
