@@ -62,7 +62,6 @@ myApp.controller('mapCtrl', function($scope) {
 		google.maps.event.trigger($scope.markers[i-1], 'click');
 	}
 
-<<<<<<< HEAD
 	$scope.updateMarkers = function() {
 		//for loop clears all markers when it runs.
 		for(i=0;i < $scope.markers.length; i++) {
@@ -117,9 +116,7 @@ myApp.controller('mapCtrl', function($scope) {
   		});
   	}
 
-	
 
-||||||| merged common ancestors
 	$scope.updateMarkers = function() {
 		alert("test");
 		for(i=0;i < $scope.markers.length; i++) {
@@ -133,8 +130,6 @@ myApp.controller('mapCtrl', function($scope) {
 		console.log($scope.filteredCities);
 	}
 
-=======
->>>>>>> master
 	getDirections = function (lat, lon) {
 		// 
 		var directionsService = new google.maps.DirectionsService();
