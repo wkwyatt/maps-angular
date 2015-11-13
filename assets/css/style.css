@@ -1,4 +1,30 @@
 /* line 1, ../compass/sass/style.scss */
+body {
+  background: #efefef;
+}
+/* line 3, ../compass/sass/style.scss */
+body form {
+  text-align: center;
+}
+/* line 5, ../compass/sass/style.scss */
+body form #filter-input {
+  width: 24%;
+}
+/* line 9, ../compass/sass/style.scss */
+body .container {
+  background: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 4px auto 4px 10px;
+  width: 270px;
+  text-align: center;
+  padding: 7px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+/* line 23, ../compass/sass/style.scss */
 #map {
   height: 99vh;
   width: 75%;
