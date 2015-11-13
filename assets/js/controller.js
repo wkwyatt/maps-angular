@@ -1,6 +1,8 @@
 var myApp = angular.module('myApp', []);
 myApp.controller('mapCtrl', function($scope) {
 
+//***********Update Map button and Show info buttons need to reset the page.
+
 	// create map options for google map constructor
 	var mapOption = {
 		zoom: 4,
@@ -62,6 +64,7 @@ myApp.controller('mapCtrl', function($scope) {
 		google.maps.event.trigger($scope.markers[i-1], 'click');
 	}
 
+
 	$scope.updateMarkers = function() {
 		//for loop clears all markers when it runs.
 		for(i=0;i < $scope.markers.length; i++) {
@@ -74,6 +77,8 @@ myApp.controller('mapCtrl', function($scope) {
 
 	}
 
+	//runs on click event from "search hotels" button to zoom to the 
+	//city selected and add markers for lodging locations.
 	$scope.lodgingSearch = function(latLon) {
 		latLon = latLon.split(',');
 		var lat = latLon[0];
@@ -82,9 +87,11 @@ myApp.controller('mapCtrl', function($scope) {
 		map = new google.maps.Map(document.getElementById('map'), {
 
 	    center: position,
-	    zoom: 13
+	    zoom: 12
 	  });
 
+//********** rename infowindow? already have infoWindow above line 16.
+//*********  Need to pass infowindow info from cities array to populate the info box.
 		infowindow = new google.maps.InfoWindow();
 
   		var service = new google.maps.places.PlacesService(map);
@@ -94,6 +101,7 @@ myApp.controller('mapCtrl', function($scope) {
   			types: ['lodging']
   		}, callback);
   	}
+
   	function callback(results, status) {
   		if (status === google.maps.places.PlacesServiceStatus.OK) {
   			for (var i = 0; i < results.length; i++) {
@@ -118,7 +126,6 @@ myApp.controller('mapCtrl', function($scope) {
 
 
 	$scope.updateMarkers = function() {
-		alert("test");
 		for(i=0;i < $scope.markers.length; i++) {
 			$scope.markers[i].setMap(null);
 		}
