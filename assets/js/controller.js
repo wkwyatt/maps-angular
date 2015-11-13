@@ -107,10 +107,11 @@ myApp.controller('mapCtrl', function($scope) {
   			map: map,
   			position: place.geometry.location,
   			icon: 'assets/images/hotel.png'
+
   		});
 
   		google.maps.event.addListener(marker, 'click', function() {
-  			infowindow.setContent('<h2>'+place.name+'</h2>');
+  			infowindow.setContent('<h4>'+place.name+ ' - ' + 'Rating' + ': '+ place.rating+'</h4>');
   			infowindow.open(map, this);
   		});
   	}
