@@ -24,12 +24,12 @@
 	<!-- LIST OF CITIES -->
 	<div id="list-window">
 		<!-- FILTER SEARCH OF CITIES -->
-		<form ng-submit="updateMarkers(searchString)">
-			<input id="filter-input" ng-model="searchString" type="text">
+		<form ng-submit="updateMarkers(searchString)" class="row form-inline">
+			<input id="filter-input" class="form-control" ng-model="searchString" type="text">
 			<input class="btn btn-defualt" type="submit" value="Update Map">
 			<!-- LOOP THROUGH CITIES OBJECT IN ANG -->
-			<div class="city" ng-repeat="city in (filteredCities = (cities | filter:searchString))">
-				{{city.yearRank}}: {{city.city}}
+			<div class="city container" ng-repeat="city in (filteredCities = (cities | filter:searchString))">
+				<h4>{{city.yearRank}}: {{city.city}}</h4>
 				<a class="btn btn-primary sm map-buttons" href="#" ng-click="triggerClick(city.yearRank)">
 				Show info
 				</a>
