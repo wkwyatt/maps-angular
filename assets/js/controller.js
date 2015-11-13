@@ -1,3 +1,6 @@
+
+
+
 var myApp = angular.module('myApp', []);
 myApp.controller('mapCtrl', function($scope) {
 
@@ -17,9 +20,9 @@ myApp.controller('mapCtrl', function($scope) {
 
 	// create markers for each city in the cities obj
 	var createMarker = function(city, index) {
-		console.log(city);
-		console.log(index);
-		console.log(typeof(latLon));
+		// console.log(city);
+		// console.log(index);
+		// console.log(typeof(latLon));
 
 		// create an array obj from the latLon string
 		var latLon = city.latLon.split(',');
@@ -151,4 +154,34 @@ myApp.controller('mapCtrl', function($scope) {
     for(i=0;i<cities.length;i++){
         createMarker(cities[i],i)
     }
+
+
+$(document).ready(function($){  
+
+    var apikey = 'a1200565a7a6d651a8c9393a3d27cd93';
+    var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=Atlanta,ga&units=imperial&APPID="+apikey;
+    var weatherIcon = "http://openweathermap.org/img/w/" + currWeatherIcon;
+    var currWeatherIcon = "";
+    // console.log(weatherIcon);
+    //http://openweathermap.org/img/w/undefined
+
+
+$.getJSON(weatherUrl, function(weatherData) {
+      console.log(weatherData);
+      currTemp = weatherData.main.temp;
+      currWeatherIcon = weatherData.weather.icon;
+    });
 });
+
+
+});
+
+
+
+
+
+
+
+
+
+//end
