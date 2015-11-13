@@ -1,22 +1,22 @@
 body {
 	background: #efefef;
+	form {
+		text-align: center;
+		#filter-input {
+			width: 24%;
+		}
+	}
 	.container {
 		background: white;
 		box-shadow: 0 1px 2px rgba(0,0,0,.1);
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
-		margin:4px auto 4px 15px;
+		margin:4px auto 4px 10px;
 		width: 270px;
 		text-align: center;
 		padding: 7px;
 		display: inline-block;
 		overflow: hidden;
-		// padding: 7px;
-
-		// a {
-		// 	margin-bottom: 5px;
-		// 	width: 150px;
-		// }
 	}
 }
 
