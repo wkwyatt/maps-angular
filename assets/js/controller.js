@@ -128,6 +128,7 @@ myApp.controller('mapCtrl', function($scope) {
 
   	$scope.findRestuarants = function(location, title, icon) {
   		$scope.showLocation(location, title, icon);
+  		console.log(icon);
 
   		infowindow = new google.maps.InfoWindow();
 
@@ -163,6 +164,45 @@ myApp.controller('mapCtrl', function($scope) {
   		$scope.markers.push(marker);
   		console.log(origin);
   	}
+
+  	$scope.findGasStations = function(location, title, icon) {
+  		$scope.showLocation(location, title, icon);
+
+  		infowindow = new google.maps.InfoWindow();
+
+		var service = new google.maps.places.PlacesService(map);
+		service.nearbySearch({
+			location: location,
+			radius: 5000000,
+			types: ['gas_station']
+		}, function callback(results, status) {
+			if (status === google.maps.places.PlacesServiceStatus.OK) {
+				for (var i = 0; i < results.length; i++) {
+					createGasStationMarker(results[i],location);
+				}
+				console.log(results);
+			}
+		});
+
+	}
+
+	function createGasStationMarker(place, origin) {
+
+  		var marker = createMarker(place.geometry.location, place.name, 'assets/images/gas-station.png');
+
+  		var placeOfOrigin = new google.maps.LatLng(origin.lat, origin.lng);
+  		console.log(placeOfOrigin);
+  		console.log(place.geometry.location);
+  		var markerContentHTML = '<div class="infoWindowContent">';
+  		markerContentHTML += '<a href="#" onclick="getDirections('+ place.geometry.location.lat() +', '+ place.geometry.location.lng() +', '+ placeOfOrigin +')">Get directions</a>';
+  		markerContentHTML += '</div>';
+
+  		marker.content = markerContentHTML;
+
+  		$scope.markers.push(marker);
+  		console.log(origin);
+  	}
+
 
 	$scope.updateMarkers = function() {
 		clearMarkers();

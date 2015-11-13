@@ -47,10 +47,10 @@
 				<span ng-show="items == hotels">
 					<h4><a href="#" ng-click="showLocation(item.geometry.location, item.name, 'assets/images/hotel.png')">{{item.name}}</a></h4>
 					<p>{{item.vicinity}}</p>
-					<a class="btn btn-primary sm map-buttons" href="#" ng-click="findRestuarants(item.geometry.location, item.name, 'assets/images/hotel.png')">
+					<a class="btn btn-primary sm map-buttons" href="#" ng-click="findRestuarants(item.geometry.location, item.name)">
 						Find Restuarants
 					</a>
-					<a class="btn btn-danger sm map-buttons" href="#" ng-click="">
+					<a class="btn btn-danger sm map-buttons" href="#" ng-click="findGasStations(item.geometry.location, item.name)">
 						Find Gas Stations
 					</a>
 				</span>
