@@ -150,8 +150,11 @@ myApp.controller('mapCtrl', function($scope) {
 
   		var marker = createMarker(place.geometry.location, place.name, 'assets/images/food.png');
 
+  		var placeOfOrigin = new google.maps.LatLng(origin.lat, origin.lng);
+  		console.log(placeOfOrigin);
+  		console.log(place.geometry.location);
   		var markerContentHTML = '<div class="infoWindowContent">';
-  		markerContentHTML += '<a href="#" onclick="getDirections('+ place.geometry.location +', '+ origin +')">Get directions</a>';
+  		markerContentHTML += '<a href="#" onclick="getDirections('+ place.geometry.location.lat() +', '+ place.geometry.location.lng() +', '+ placeOfOrigin +')">Get directions</a>';
   		markerContentHTML += '</div>';
 
   		marker.content = markerContentHTML;
