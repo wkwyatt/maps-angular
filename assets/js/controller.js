@@ -123,14 +123,14 @@ myApp.controller('mapCtrl', function($scope) {
 		// 
 		var directionsService = new google.maps.DirectionsService();
    		var directionsDisplay = new google.maps.DirectionsRenderer();
-   		var map = new google.mpas.Map(document.getElementById('map'), {
+   		var map = new google.maps.Map(document.getElementById('map'), {
    			zoom: 7,
-   			mapTypeId: google.maps.MapTypeId.ROADMAP
+   			mapType: google.maps.MapTypeId.ROADMAP
    		});
 
    		// set the map for directions on the id given
    		directionsDisplay.setMap(map);
-   		directionsService.setPanel(document.getElementById('map-panel'));
+   		directionsDisplay.setPanel(document.getElementById('map-panel'));
 
    		var request = {
            //Origin hardcoded to Atlanta. Require geocode current loc,
@@ -169,8 +169,10 @@ $(document).ready(function($){
 $.getJSON(weatherUrl, function(weatherData) {
       console.log(weatherData);
       currTemp = weatherData.main.temp;
-      currWeatherIcon = weatherData.weather.icon;
+      currWeatherIcon = weatherData.weather[0].icon = '.png';
     });
+// console.log(currTemp);
+console.log(currWeatherIcon);
 });
 
 
