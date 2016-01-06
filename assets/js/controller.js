@@ -38,8 +38,11 @@ myApp.controller('mapCtrl', function($scope) {
 	};
 
 	// sync the click event on the button to the marker on the map
-	$scope.triggerClick = function(i) {
+	$scope.triggerClick = function(i, city) {
 		google.maps.event.trigger($scope.markers[i], 'click');
+		getWeather(city);
+		console.log(city);
+		console.log(getWeather(city));
 	}
 
 
@@ -250,7 +253,21 @@ myApp.controller('mapCtrl', function($scope) {
 			}
 
         	var marker = createMarker(position, cities[i].city, icon);
+			
+			var weatherAPIKey = "40506dc613c1b32f5843771e00b2e755"
 
+		var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q="+cities[i].city+"&units=imperial&APPID="+weatherAPIKey;
+		var forecastUrl = 'http://api.openweathermap.org/data/2.5/forecast/daily?q='+cities[i].city+',us&units=imperial&APPID='+weatherAPIKey;
+		var weatherIcon =  "http://openweathermap.org/img/w/";
+		var weatherTemp; 
+		$.getJSON(weatherUrl, function(weatherData) {
+			console.log(weatherData);
+			weatherIcon += weatherData.weather[0].icon;
+			weatherTemp = weatherData.main.temp;
+			console.log(weatherTemp);
+		});
+
+		console.log(weatherTemp);
         	// create HTML for the info window div
 		   var markerContentHTML = '<div class="infoWindowContent">';
 	       markerContentHTML += '<div class="total-pop">Total Population: ' + cities[i].yearEstimate + '</div>';
@@ -259,6 +276,8 @@ myApp.controller('mapCtrl', function($scope) {
 	       markerContentHTML += '<div class="pop-dens">Population Density: ' + cities[i].lastPopDensity + '</div>';
 	       markerContentHTML += '<div class="state">State: ' + cities[i].state + '</div>';
 	       markerContentHTML += '<div class="land-area">Land Area: ' + cities[i].landArea + '</div>';
+	       markerContentHTML += '<div id="weather-icon"><img src="'+weatherIcon+'></div>';
+	       markerContentHTML += '<div id="weather-temp">Current Temp:  '+weatherTemp+'</div>';
 	       markerContentHTML += '<a href="#" onclick="getDirections('+lat+','+lon+', \'Atlanta, ga\')">Get directions</a>';
 	       markerContentHTML += '</div>'; 
 
